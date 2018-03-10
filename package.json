@@ -10,7 +10,7 @@
     "node": "9.8.0",
     "npm": "5.6.0"
   },
-  "keywords": ["amqp"],
+  "keywords": ["amqp", "message-queue", "pubsub"],
   "scripts": {
     "eslint-check":
       "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
@@ -73,11 +73,11 @@
     "supertest": "^3.0.0",
     "wait-until": "0.0.2"
   },
-  "repository": "",
+  "repository": "https://github.com/davesag/amqp-simple-pub-sub.git",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/davesag/amqp-simple-pub-sub/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/davesag/amqp-simple-pub-sub#README",
   "dependencies": {
     "amqplib": "^0.5.2"
   }
