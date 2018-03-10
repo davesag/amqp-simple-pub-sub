@@ -1,0 +1,86 @@
+{
+  "name": "amqp-simple-pub-sub",
+  "version": "1.0.0",
+  "description":
+    "A simple Pub Sub system that uses AMQP Messaging to exchange data between services",
+  "main": "index.js",
+  "author": "Dave Sag <davesag@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": "9.8.0",
+    "npm": "5.6.0"
+  },
+  "keywords": ["amqp"],
+  "scripts": {
+    "eslint-check":
+      "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "lint": "eslint .",
+    "precommit": "lint-staged",
+    "prettier": "prettier --single-quote --no-semi --write '**/*.{js,json}'",
+    "seed": "node tasks/seed",
+    "start": "node index.js",
+    "backend": "docker-compose up -d db redis",
+    "start:production": "NODE_ENV=production node dist/index",
+    "test": "npm run test:unit",
+    "test:all": "npm run test:unit; npm run test:integration",
+    "test:integration": "npm run test:server; npm run test:db",
+    "test:server":
+      "find ./test/server -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/server/test_helper.js --bail",
+    "test:db":
+      "find ./test/db -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/db/test_helper.js --bail",
+    "test:unit":
+      "find ./test/unit -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/unit/test_helper.js",
+    "test:unit:cov":
+      "find ./test/unit -name '*_spec.js' | NODE_ENV=test xargs nyc mocha --require ./test/unit/test_helper.js",
+    "test:all:cov": "nyc npm run test:all"
+  },
+  "lint-staged": {
+    "**/*.{js,json}": ["prettier --single-quote --no-semi --write", "git add"]
+  },
+  "nyc": {
+    "check-coverage": true,
+    "per-file": true,
+    "lines": 100,
+    "statements": 100,
+    "functions": 100,
+    "branches": 100,
+    "include": ["src/**/*.js"],
+    "exclude": ["index.js"],
+    "reporter": ["lcov", "text"],
+    "all": true,
+    "cache": true
+  },
+  "devDependencies": {
+    "ajv": "^6.2.1",
+    "chai": "^4.1.2",
+    "chai-as-promised": "^7.1.1",
+    "chai-string": "^1.4.0",
+    "eslint": "^4.18.2",
+    "eslint-config-prettier": "^2.8.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-mocha": "^4.12.1",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "faker": "^4.1.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.0",
+    "mocha": "^5.0.1",
+    "mocha-prepare-promise": "0.0.1",
+    "nyc": "^11.5.0",
+    "prettier": "^1.11.1",
+    "proxyquire": "^2.0.0",
+    "sinon": "^4.1.2",
+    "sinon-chai": "^3.0.0",
+    "sinon-stub-promise": "^4.0.0",
+    "supertest": "^3.0.0"
+  },
+  "repository": "",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {}
+}
