@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description":
     "A simple Pub Sub system that uses AMQP Messaging to exchange data between services",
-  "main": "index.js",
+  "main": "src/index.js",
   "author": "Dave Sag <davesag@gmail.com>",
   "license": "MIT",
   "engines": {
@@ -22,17 +22,12 @@
     "backend": "docker-compose up -d db redis",
     "start:production": "NODE_ENV=production node dist/index",
     "test": "npm run test:unit",
-    "test:all": "npm run test:unit; npm run test:integration",
-    "test:integration": "npm run test:server; npm run test:db",
-    "test:server":
-      "find ./test/server -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/server/test_helper.js --bail",
-    "test:db":
-      "find ./test/db -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/db/test_helper.js --bail",
+    "test:integration":
+      "find ./test/integration -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/integration/test_helper.js --bail",
     "test:unit":
       "find ./test/unit -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/unit/test_helper.js",
     "test:unit:cov":
-      "find ./test/unit -name '*_spec.js' | NODE_ENV=test xargs nyc mocha --require ./test/unit/test_helper.js",
-    "test:all:cov": "nyc npm run test:all"
+      "find ./test/unit -name '*_spec.js' | NODE_ENV=test xargs nyc mocha --require ./test/unit/test_helper.js"
   },
   "lint-staged": {
     "**/*.{js,json}": ["prettier --single-quote --no-semi --write", "git add"]
@@ -45,7 +40,7 @@
     "functions": 100,
     "branches": 100,
     "include": ["src/**/*.js"],
-    "exclude": ["index.js"],
+    "exclude": ["src/index.js"],
     "reporter": ["lcov", "text"],
     "all": true,
     "cache": true
@@ -75,12 +70,15 @@
     "sinon": "^4.1.2",
     "sinon-chai": "^3.0.0",
     "sinon-stub-promise": "^4.0.0",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "wait-until": "0.0.2"
   },
   "repository": "",
   "bugs": {
     "url": ""
   },
   "homepage": "",
-  "dependencies": {}
+  "dependencies": {
+    "amqplib": "^0.5.2"
+  }
 }

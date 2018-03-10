@@ -9,7 +9,34 @@ A simple Pub Sub system that uses AMQP Messaging to exchange data between servic
 
     npm install amqp-simple-pub-sub
 
-_ fill this in_
+
+### Create a Publisher
+    const { makePublisher } = require('amqp-simple-pub-sub')
+    const publisher = makePublisher({ exchange: 'testService' })
+
+### Publish a message
+
+    await publisher.start()
+    publisher.publish('test', 'Hello World')
+
+### Create a Subscriber
+
+    const { makeSubscriber } = require('amqp-simple-pub-sub')
+
+    const subscriber = makeSubscriber({
+      exchange: 'testService',
+      queueName: 'testQueue',
+      routingKeys: ['test']
+    })
+
+### Subscribe to a queue and listen for messages
+
+    const handler = message => {
+      console.log('Message Received', message)
+      subscriber.ack(message)
+    }
+
+    subscriber.start(handler)
 
 ## Development
 
