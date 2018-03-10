@@ -39,6 +39,42 @@ _note this has not been published to NPM yet_
 
     subscriber.start(handler)
 
+### Other Options
+
+#### Publisher
+
+The full options object is as follows
+
+    {
+      type: 'topic' // the default
+      url: 'amqp://localhost' // the default
+      exchange: 'you must provide this' // it's the name of your service usually
+      onError: err => { // optional
+        console.error('A connection error happened', err) // or do something clever
+      }
+      onClose: () => { // optional
+        console.log('The connection has closed.') // or do something clever
+      }
+    }
+
+#### Subscriber
+
+The full options object is as follows
+
+    {
+      type: 'topic' // the default
+      url: 'amqp://localhost' // the default
+      exchange: 'you must provide this' // it's the name of your service usually
+      queueName: 'you must also provide this' // give your queue a name
+      routingKeys: ['an', 'array', 'of', 'routingKeys'] // optional.  Uses [queueName] otherwise.
+      onError: err => { // optional
+        console.error('A connection error happened', err) // or do something clever
+      }
+      onClose: () => { // optional
+        console.log('The connection has closed.') // or do something clever
+      }
+    }
+
 ## Development
 
 ### Prerequisites

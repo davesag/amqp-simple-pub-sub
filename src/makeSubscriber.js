@@ -55,7 +55,7 @@ const makeSubscriber = options => {
     channel.assertExchange(exchange, type, { durable: true })
     const result = await channel.assertQueue(queueName, { exclusive: false })
     ;({ queue } = result)
-    const routingKeys = options.routingKeys || [queueName]
+    const routingKeys = _options.routingKeys || [queueName]
     routingKeys.forEach(routingKey => {
       channel.bindQueue(queue, exchange, routingKey)
     })
