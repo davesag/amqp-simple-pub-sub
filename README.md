@@ -7,8 +7,6 @@ A simple Pub Sub system that uses AMQP Messaging to exchange data between servic
 
 ## To Use
 
-_note this has not been published to NPM yet_
-
     npm install amqp-simple-pub-sub
 
 ### Create a Publisher
