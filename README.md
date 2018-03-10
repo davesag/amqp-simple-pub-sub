@@ -2,13 +2,14 @@
 
 A simple Pub Sub system that uses AMQP Messaging to exchange data between services
 
-* `develop` — [circleCI badge] [codecov badge]
-* `master` — [circleCI badge] [codecov badge]
+* `develop` — [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop) [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/develop/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub)
+* `master` — [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/master.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/master) [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/master/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub)
 
 ## To Use
 
-    npm install amqp-simple-pub-sub
+_note this has not been published to NPM yet_
 
+    npm install amqp-simple-pub-sub
 
 ### Create a Publisher
     const { makePublisher } = require('amqp-simple-pub-sub')
