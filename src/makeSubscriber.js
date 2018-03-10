@@ -7,6 +7,7 @@ const {
   NOT_CONNECTED
 } = require('./errors')
 const defaults = require('./defaults')
+const attachEvents = require('./attachEvents')
 
 /**
  * Create a Subscriber with the given options.
@@ -16,6 +17,8 @@ const defaults = require('./defaults')
  *   - routingKeys An array of keys to use for message handler routing (optional, defaults to [queueName])
  *   - type The type of AMQP queue to use. Defaults to 'topic'
  *   - url The url of the AQMP server to use.  Defaults to 'amqp://localhost'
+ *   - onError a hander to handle connection errors (optional)
+ *   - onClose a handler to handle connection closed events (optional)
  * @return A Subscriber
  */
 const makeSubscriber = options => {
@@ -24,7 +27,7 @@ const makeSubscriber = options => {
     ...options
   }
 
-  const { exchange, queueName, type, url } = _options
+  const { exchange, queueName, type, url, onError, onClose } = _options
 
   if (!exchange) throw new Error(EXCHANGE_MISSING)
   if (!queueName) throw new Error(QUEUE_MISSING)
@@ -46,6 +49,8 @@ const makeSubscriber = options => {
   const start = async handler => {
     if (channel) throw new Error(QUEUE_ALREADY_STARTED)
     connection = await amqp.connect(url)
+    attachEvents(connection, { onError, onClose })
+
     channel = await connection.createChannel()
     channel.assertExchange(exchange, type, { durable: true })
     const result = await channel.assertQueue(queueName, { exclusive: false })

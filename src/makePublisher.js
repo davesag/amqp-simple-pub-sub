@@ -6,6 +6,7 @@ const {
   NOT_CONNECTED
 } = require('./errors')
 const defaults = require('./defaults')
+const attachEvents = require('./attachEvents')
 
 /**
  * Create a publisher with the given options.
@@ -13,6 +14,8 @@ const defaults = require('./defaults')
  *   - exchange The name of the service exchange queue (required)
  *   - type The type of AMQP queue to use. Defaults to 'topic'
  *   - url The url of the AQMP server to use.  Defaults to 'amqp://localhost'
+ *   - onError a hander to handle connection errors (optional)
+ *   - onClose a handler to handle connection closed events (optional)
  * @return A Publisher
  */
 const makePublisher = options => {
@@ -21,7 +24,7 @@ const makePublisher = options => {
     ...options
   }
 
-  const { exchange, type, url } = _options
+  const { exchange, type, url, onError, onClose } = _options
 
   if (!exchange) throw new Error(EXCHANGE_MISSING)
 
@@ -31,6 +34,8 @@ const makePublisher = options => {
   const start = async () => {
     if (channel) throw new Error(QUEUE_ALREADY_STARTED)
     connection = await amqp.connect(url)
+    attachEvents(connection, { onError, onClose })
+
     channel = await connection.createChannel()
     await channel.assertExchange(exchange, type, { durable: true })
   }
