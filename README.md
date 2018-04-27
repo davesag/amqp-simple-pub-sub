@@ -1,5 +1,7 @@
 # AMQP Simple Pub Sub
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/davesag/amqp-simple-pub-sub.svg)](https://greenkeeper.io/)
+
 A simple Pub Sub system that uses AMQP Messaging to exchange data between services
 
 * `develop` — [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop) [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/develop/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub)
@@ -77,7 +79,7 @@ The full options object is as follows
 
 ### Prerequisites
 
-* [NodeJS](htps://nodejs.org), version 9.8.0 or better (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
+* [NodeJS](htps://nodejs.org), version 9+ or better (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
 * [Docker](https://www.docker.com) (Use [Docker for Mac](https://docs.docker.com/docker-for-mac/), not the homebrew version)
 
 ### Initialisation
