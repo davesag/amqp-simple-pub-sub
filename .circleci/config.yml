@@ -7,13 +7,9 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:9.7.1
+      - image: circleci/node:9.11.1
         environment:
         - NODE_ENV: test
-        - DB_USER: root
-        - DB_PASS: test
-        - DB_HOST: 127.0.0.1
-        - DB_NAME: circle-test
 
       - image: rabbitmq
 
