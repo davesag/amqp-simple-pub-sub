@@ -63,7 +63,7 @@
     "lint-staged": "^7.0.5",
     "mocha": "^5.1.1",
     "mocha-prepare-promise": "0.0.1",
-    "nyc": "^11.7.1",
+    "nyc": "^12.0.1",
     "prettier": "^1.12.1",
     "proxyquire": "^2.0.1",
     "sinon": "^4.5.0",
