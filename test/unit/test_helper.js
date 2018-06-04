@@ -1,11 +1,8 @@
-const sinon = require('sinon')
 const chai = require('chai')
 const sinonChai = require('sinon-chai')
 const chaiAsPromised = require('chai-as-promised')
 const chaiString = require('chai-string')
-const sinonStubPromise = require('sinon-stub-promise')
 
 chai.use(sinonChai)
 chai.use(chaiAsPromised)
 chai.use(chaiString)
-sinonStubPromise(sinon)

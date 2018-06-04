@@ -7,6 +7,8 @@ A simple Pub Sub system that uses AMQP Messaging to exchange data between servic
 * `develop` — [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop) [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/develop/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub)
 * `master` — [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/master.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/master) [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/master/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub)
 
+[![NPM](https://nodei.co/npm/amqp-simple-pub-sub.png)](https://nodei.co/npm/amqp-simple-pub-sub/)
+
 ## To Use
 
     npm install amqp-simple-pub-sub
@@ -79,7 +81,7 @@ The full options object is as follows
 
 ### Prerequisites
 
-* [NodeJS](htps://nodejs.org), version 9+ or better (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
+* [NodeJS](htps://nodejs.org), version 10+ or better (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
 * [Docker](https://www.docker.com) (Use [Docker for Mac](https://docs.docker.com/docker-for-mac/), not the homebrew version)
 
 ### Initialisation
