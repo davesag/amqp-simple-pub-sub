@@ -27,7 +27,15 @@ const makeSubscriber = options => {
     ...options
   }
 
-  const { exchange, queueName, type, url, onError, onClose } = _options
+  const {
+    exchange,
+    queueName,
+    routingKeys,
+    type,
+    url,
+    onClose,
+    onError
+  } = _options
 
   if (!exchange) throw new Error(EXCHANGE_MISSING)
   if (!queueName) throw new Error(QUEUE_MISSING)
@@ -37,7 +45,9 @@ const makeSubscriber = options => {
   let queue
 
   /**
-   * @param handler A callback that takes a message param. The callback is invoked when a message is received.
+   * @param handler A callback that takes a message param.
+   *        The callback is invoked when a message is received.
+   *
    * Example use
    * const subscriber = makeSubscriber({ exchange: 'test', queueName: 'test' })
    * const handler = message => {
@@ -55,9 +65,9 @@ const makeSubscriber = options => {
     channel.assertExchange(exchange, type, { durable: true })
     const result = await channel.assertQueue(queueName, { exclusive: false })
     ;({ queue } = result)
-    const routingKeys = _options.routingKeys || [queueName]
-    routingKeys.forEach(routingKey => {
-      channel.bindQueue(queue, exchange, routingKey)
+    const rKeys = routingKeys || [queueName]
+    rKeys.forEach(rKey => {
+      channel.bindQueue(queue, exchange, rKey)
     })
     channel.prefetch(1)
     channel.consume(queue, handler)
