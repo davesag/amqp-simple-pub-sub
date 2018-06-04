@@ -3,11 +3,11 @@ const { stub } = require('sinon')
 const fakeQueue = () => 'some queue'
 
 const fakeChannel = () => ({
-  assertExchange: stub().returnsPromise(),
-  publish: stub().returnsPromise(),
-  close: stub().returnsPromise(),
-  assertQueue: stub().returnsPromise(),
-  purgeQueue: stub().returnsPromise(),
+  assertExchange: stub(),
+  publish: stub(),
+  close: stub(),
+  assertQueue: stub(),
+  purgeQueue: stub(),
   bindQueue: stub(),
   prefetch: stub(),
   consume: stub(),
@@ -16,12 +16,12 @@ const fakeChannel = () => ({
 })
 
 const fakeConnection = () => ({
-  createChannel: stub().returnsPromise(),
-  close: stub().returnsPromise()
+  createChannel: stub(),
+  close: stub()
 })
 
 const mockAmqplib = () => ({
-  connect: stub().returnsPromise()
+  connect: stub()
 })
 
 module.exports = {

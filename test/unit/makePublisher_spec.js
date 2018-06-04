@@ -17,9 +17,8 @@ describe('makePublisher', () => {
   let connection
 
   context('with missing options', () => {
-    it('throws EXCHANGE_MISSING if not supplied with an exchange', () => {
-      expect(() => makePublisher()).to.throw(EXCHANGE_MISSING)
-    })
+    it('throws EXCHANGE_MISSING if not supplied with an exchange', () =>
+      expect(() => makePublisher()).to.throw(EXCHANGE_MISSING))
   })
 
   context('with valid options', () => {

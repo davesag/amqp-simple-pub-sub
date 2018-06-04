@@ -1,19 +1,26 @@
 {
   "name": "amqp-simple-pub-sub",
-  "version": "1.0.1",
-  "description":
-    "A simple Pub Sub system that uses AMQP Messaging to exchange data between services",
+  "version": "1.0.2",
+  "description": "A simple Pub Sub system that uses AMQP Messaging to exchange data between services",
   "main": "src/index.js",
   "author": "Dave Sag <davesag@gmail.com>",
   "license": "MIT",
   "engines": {
-    "node": "10.0.0",
-    "npm": "5.8.0"
+    "node": "10.3.0",
+    "npm": "6.1.0"
   },
-  "keywords": ["amqp", "message-queue", "pubsub"],
+  "keywords": [
+    "amqp",
+    "message-queue",
+    "pubsub",
+    "pub-sub",
+    "publisher",
+    "subscriber",
+    "microservices",
+    "micro-services"
+  ],
   "scripts": {
-    "eslint-check":
-      "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "lint": "eslint .",
     "precommit": "lint-staged",
     "prettier": "prettier --single-quote --no-semi --write '**/*.{js,json}'",
@@ -21,15 +28,15 @@
     "backend": "docker-compose up -d amqp",
     "start:production": "NODE_ENV=production node dist/index",
     "test": "npm run test:unit",
-    "test:integration":
-      "find ./test/integration -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/integration/test_helper.js --bail",
-    "test:unit":
-      "find ./test/unit -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/unit/test_helper.js",
-    "test:unit:cov":
-      "find ./test/unit -name '*_spec.js' | NODE_ENV=test xargs nyc mocha --require ./test/unit/test_helper.js"
+    "test:integration": "find ./test/integration -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/integration/test_helper.js --bail",
+    "test:unit": "find ./test/unit -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/unit/test_helper.js",
+    "test:unit:cov": "find ./test/unit -name '*_spec.js' | NODE_ENV=test xargs nyc mocha --require ./test/unit/test_helper.js"
   },
   "lint-staged": {
-    "**/*.{js,json}": ["prettier --single-quote --no-semi --write", "git add"]
+    "**/*.{js,json}": [
+      "prettier --single-quote --no-semi --write",
+      "git add"
+    ]
   },
   "nyc": {
     "check-coverage": true,
@@ -38,38 +45,43 @@
     "statements": 100,
     "functions": 100,
     "branches": 100,
-    "include": ["src/**/*.js"],
-    "exclude": ["src/index.js"],
-    "reporter": ["lcov", "text"],
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "src/index.js"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ],
     "all": true,
     "cache": true
   },
   "devDependencies": {
-    "ajv": "^6.4.0",
+    "ajv": "^6.5.0",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
-    "chai-string": "^1.4.0",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.8.0",
     "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-mocha": "^5.0.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-prettier": "^2.3.1",
-    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
     "faker": "^4.1.0",
     "husky": "^0.14.3",
-    "lint-staged": "^7.0.5",
-    "mocha": "^5.1.1",
+    "lint-staged": "^7.1.3",
+    "mocha": "^5.2.0",
     "mocha-prepare-promise": "0.0.1",
-    "nyc": "^11.7.1",
-    "prettier": "^1.12.1",
+    "nyc": "^12.0.2",
+    "prettier": "^1.13.4",
     "proxyquire": "^2.0.1",
-    "sinon": "^4.5.0",
-    "sinon-chai": "^3.0.0",
-    "sinon-stub-promise": "^4.0.0",
-    "supertest": "^3.0.0",
+    "sinon": "^5.0.10",
+    "sinon-chai": "^3.1.0",
+    "supertest": "^3.1.0",
     "wait-until": "0.0.2"
   },
   "repository": "https://github.com/davesag/amqp-simple-pub-sub.git",
