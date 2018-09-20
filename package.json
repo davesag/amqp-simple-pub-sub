@@ -3,6 +3,9 @@
   "version": "1.0.4",
   "description": "A simple Pub Sub system that uses AMQP Messaging to exchange data between services",
   "main": "src/index.js",
+  "engines": {
+    "node": ">8.0.0"
+  },
   "author": "Dave Sag <davesag@gmail.com>",
   "license": "MIT",
   "keywords": [

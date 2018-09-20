@@ -11,6 +11,8 @@ A simple Pub Sub system that uses AMQP Messaging to exchange data between servic
 
 ## To Use
 
+You project needs to be using at least Node version 8, and ideally Node 10 or better.
+
     npm install amqp-simple-pub-sub
 
 ### Create a Publisher
@@ -76,6 +78,13 @@ The full options object is as follows
         console.log('The connection has closed.') // or do something clever
       }
     }
+
+#### Examples
+
+See some examples in the tests, and also:
+
+* [competing-services-example](https://github.com/davesag/competing-services-example)
+* And the associated article:  [itnext.io/connecting-competing-microservices-using-rabbitmq](https://itnext.io/connecting-competing-microservices-using-rabbitmq-28e5269861b6)
 
 ## Development
 
