@@ -24,7 +24,6 @@
     "prettier": "prettier --single-quote --no-semi --write '**/*.{js,json}'",
     "start": "node index.js",
     "backend": "docker-compose up -d amqp",
-    "start:production": "NODE_ENV=production node dist/index",
     "test": "npm run test:unit",
     "test:integration": "find ./test/integration -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/integration/test_helper.js --bail",
     "test:unit": "find ./test/unit -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/unit/test_helper.js",
