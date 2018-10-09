@@ -1,10 +1,10 @@
 {
   "name": "amqp-simple-pub-sub",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A simple Pub Sub system that uses AMQP Messaging to exchange data between services",
   "main": "src/index.js",
   "engines": {
-    "node": ">8.0.0"
+    "node": ">8.12.0"
   },
   "author": "Dave Sag <davesag@gmail.com>",
   "license": "MIT",
@@ -21,11 +21,9 @@
   "scripts": {
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "lint": "eslint .",
-    "precommit": "lint-staged",
     "prettier": "prettier --single-quote --no-semi --write '**/*.{js,json}'",
     "start": "node index.js",
     "backend": "docker-compose up -d amqp",
-    "start:production": "NODE_ENV=production node dist/index",
     "test": "npm run test:unit",
     "test:integration": "find ./test/integration -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/integration/test_helper.js --bail",
     "test:unit": "find ./test/unit -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/unit/test_helper.js",
@@ -58,27 +56,27 @@
     "cache": true
   },
   "devDependencies": {
-    "ajv": "^6.5.3",
-    "chai": "^4.1.2",
+    "ajv": "^6.5.4",
+    "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "eslint": "^5.6.0",
-    "eslint-config-prettier": "^3.0.1",
+    "eslint": "^5.6.1",
+    "eslint-config-prettier": "^3.1.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-mocha": "^5.2.0",
     "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
     "faker": "^4.1.0",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.2.2",
+    "husky": "^1.1.1",
+    "lint-staged": "^7.3.0",
     "mocha": "^5.2.0",
     "mocha-prepare-promise": "0.0.1",
     "nyc": "^13.0.1",
     "prettier": "^1.14.3",
     "proxyquire": "^2.1.0",
-    "sinon": "^6.3.4",
+    "sinon": "^6.3.5",
     "sinon-chai": "^3.2.0",
     "supertest": "^3.3.0",
     "wait-until": "0.0.2"
@@ -90,5 +88,10 @@
   "homepage": "https://github.com/davesag/amqp-simple-pub-sub#README",
   "dependencies": {
     "amqplib": "^0.5.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
