@@ -21,7 +21,6 @@
   "scripts": {
     "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "lint": "eslint .",
-    "precommit": "lint-staged",
     "prettier": "prettier --single-quote --no-semi --write '**/*.{js,json}'",
     "start": "node index.js",
     "backend": "docker-compose up -d amqp",
@@ -90,5 +89,10 @@
   "homepage": "https://github.com/davesag/amqp-simple-pub-sub#README",
   "dependencies": {
     "amqplib": "^0.5.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
