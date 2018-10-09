@@ -1,10 +1,10 @@
 {
   "name": "amqp-simple-pub-sub",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A simple Pub Sub system that uses AMQP Messaging to exchange data between services",
   "main": "src/index.js",
   "engines": {
-    "node": ">8.0.0"
+    "node": ">8.12.0"
   },
   "author": "Dave Sag <davesag@gmail.com>",
   "license": "MIT",
