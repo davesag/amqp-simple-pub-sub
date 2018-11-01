@@ -70,7 +70,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "faker": "^4.1.0",
     "husky": "^1.1.1",
-    "lint-staged": "^7.3.0",
+    "lint-staged": "^8.0.0",
     "mocha": "^5.2.0",
     "mocha-prepare-promise": "0.0.1",
     "nyc": "^13.0.1",
