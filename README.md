@@ -11,7 +11,7 @@ A simple Pub Sub system that uses AMQP Messaging to exchange data between servic
 
 ## To Use
 
-You project needs to be using at least Node version 8, and ideally Node 10 or better.
+You project needs to be using at least Node version 8, and ideally Node 10 (LTS) or later.
 
     npm install amqp-simple-pub-sub
 
@@ -86,11 +86,16 @@ See some examples in the tests, and also:
 * [competing-services-example](https://github.com/davesag/competing-services-example)
 * And the associated article:  [itnext.io/connecting-competing-microservices-using-rabbitmq](https://itnext.io/connecting-competing-microservices-using-rabbitmq-28e5269861b6)
 
+## Related Projects
+
+* [`amqp-delegate`](https://github.com/davesag/amqp-delegate) — A library that simplifies, to the point of triviality, use of AMQP based remote workers.
+* [`ampq-event-tester`](https://github.com/davesag/amqp-event-tester) — A Dockerised and configurable utility to help integration-test your amqp services.
+
 ## Development
 
 ### Prerequisites
 
-* [NodeJS](htps://nodejs.org), version 8+ or better (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
+* [NodeJS](htps://nodejs.org), version 10.15.1 (LTS) or better (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
 * [Docker](https://www.docker.com) (Use [Docker for Mac](https://docs.docker.com/docker-for-mac/), not the homebrew version)
 
 ### Initialisation
