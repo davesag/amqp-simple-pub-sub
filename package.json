@@ -4,8 +4,13 @@
   "description": "A simple Pub Sub system that uses AMQP Messaging to exchange data between services",
   "main": "src/index.js",
   "engines": {
-    "node": ">8.12.0"
+    "node": ">= 8.12.0"
   },
+  "files": [
+    "/package*.json",
+    "/CONTRIBUTING.md",
+    "/src"
+  ],
   "author": "Dave Sag <davesag@gmail.com>",
   "license": "MIT",
   "keywords": [
