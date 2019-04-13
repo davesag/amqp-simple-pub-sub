@@ -32,7 +32,8 @@
     "test": "npm run test:unit",
     "test:integration": "find ./test/integration -name '*.test.js' | NODE_ENV=test xargs mocha --require ./test/integration/testHelper.js --bail",
     "test:unit": "find ./test/unit -name '*.test.js' | NODE_ENV=test xargs mocha --require ./test/unit/testHelper.js",
-    "test:unit:cov": "find ./test/unit -name '*.test.js' | NODE_ENV=test xargs nyc mocha --require ./test/unit/testHelper.js"
+    "test:unit:cov": "find ./test/unit -name '*.test.js' | NODE_ENV=test xargs nyc mocha --require ./test/unit/testHelper.js",
+    "test:mutants": "NODE_ENV=test NODE_PATH=. npx stryker run"
   },
   "dependencies": {
     "amqplib": "^0.5.3"
