@@ -16,27 +16,27 @@ A simple Pub Sub system that uses AMQP Messaging to exchange data between servic
 
 You project needs to be using at least Node version 8, and ideally Node 10 (LTS) or later.
 
-```
+```sh
 npm install amqp-simple-pub-sub
 ```
 
 ### Create a Publisher
 
-```
+```js
 const { makePublisher } = require('amqp-simple-pub-sub')
 const publisher = makePublisher({ exchange: 'testService' })
 ```
 
 ### Publish a message
 
-```
+```js
 await publisher.start()
 publisher.publish('test', 'Hello World')
 ```
 
 ### Create a Subscriber
 
-```
+```js
 const { makeSubscriber } = require('amqp-simple-pub-sub')
 
 const subscriber = makeSubscriber({
@@ -48,7 +48,7 @@ const subscriber = makeSubscriber({
 
 ### Subscribe to a queue and listen for messages
 
-```
+```js
 const handler = message => {
   console.log('Message Received', message)
   subscriber.ack(message)
@@ -63,7 +63,7 @@ subscriber.start(handler)
 
 The full options object is as follows
 
-```
+```js
 {
   type: 'topic', // the default
   url: 'amqp://localhost', // the default
@@ -81,7 +81,7 @@ The full options object is as follows
 
 The full options object is as follows
 
-```
+```js
 {
   type: 'topic', // the default
   url: 'amqp://localhost', // the default
@@ -118,13 +118,13 @@ See some examples in the tests, and also:
 
 ### Initialisation
 
-```
+```sh
 npm install
 ```
 
 ### To Start the queue server for integration testing.
 
-```
+```sh
 docker-compose up -d
 ```
 
@@ -132,12 +132,14 @@ Runs Rabbit MQ.
 
 ### Test it
 
-- `npm test` — runs the unit tests (quick and does not need rabbit mq running)
-- `npm run test:integration` — runs the integration tests (not so quick and needs rabbitmq running)
+- `npm test` — runs the unit tests (quick and does not need `rabbitmq` running)
+- `npm run test:unit:cov` — runs the unit tests with code coverage (does not need `rabbitmq`)
+- `npm run test:integration` — runs the integration tests (needs `rabbitmq`)
+- `npm run test:mutants` — runs the mutation tests (does not need `rabbitmq`)
 
 ### Lint it
 
-```
+```sh
 npm run lint
 ```
 

@@ -48,6 +48,10 @@ jobs:
           command: npm run test:unit:cov
 
       - run:
+          name: Mutation tests
+          command: npm run test:mutants
+
+      - run:
           name: Integration Tests
           command: npm run test:integration
 
