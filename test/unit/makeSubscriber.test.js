@@ -1,5 +1,7 @@
 const { expect } = require('chai')
+const { stub, resetHistory } = require('sinon')
 const proxyquire = require('proxyquire')
+
 const {
   fakeChannel,
   fakeConnection,
@@ -16,7 +18,12 @@ const {
 
 describe('makeSubscriber', () => {
   const amqplib = mockAmqplib()
-  const makeSubscriber = proxyquire('../../src/makeSubscriber', { amqplib })
+  const attachEvents = stub()
+  const makeSubscriber = proxyquire('../../src/makeSubscriber', {
+    amqplib,
+    './attachEvents': attachEvents
+  })
+
   let subscriber
   let queue
   let channel
@@ -51,6 +58,8 @@ describe('makeSubscriber', () => {
       subscriber = makeSubscriber({ exchange, queueName })
     })
 
+    after(resetHistory)
+
     it('created a subscriber', () => {
       expect(subscriber).to.exist
     })
@@ -63,7 +72,21 @@ describe('makeSubscriber', () => {
   })
 
   describe('start', () => {
+    const onError = stub()
+    const onClose = stub()
+    const url = 'amqp://localhost'
+    const type = 'some type'
+    const handler = stub()
+
     before(async () => {
+      subscriber = makeSubscriber({
+        url,
+        type,
+        exchange,
+        queueName,
+        onError,
+        onClose
+      })
       queue = fakeQueue()
       channel = fakeChannel()
       connection = fakeConnection()
@@ -71,11 +94,20 @@ describe('makeSubscriber', () => {
       channel.assertExchange.resolves()
       connection.createChannel.resolves(channel)
       amqplib.connect.resolves(connection)
-      await subscriber.start(() => {})
+      await subscriber.start(handler)
     })
 
+    after(resetHistory)
+
     it('connected', () => {
-      expect(amqplib.connect).to.have.been.calledOnce
+      expect(amqplib.connect).to.have.been.calledOnceWith(url)
+    })
+
+    it('attached events', () => {
+      expect(attachEvents).to.have.been.calledWith(connection, {
+        onError,
+        onClose
+      })
     })
 
     it('created a channel', () => {
@@ -83,15 +115,25 @@ describe('makeSubscriber', () => {
     })
 
     it('asserted the exchange', () => {
-      expect(channel.assertExchange).to.have.been.calledOnce
+      expect(channel.assertExchange).to.have.been.calledOnceWith(
+        exchange,
+        type,
+        { durable: true }
+      )
     })
 
     it('asserted the queue', () => {
-      expect(channel.assertQueue).to.have.been.calledOnce
+      expect(channel.assertQueue).to.have.been.calledOnceWith(queueName, {
+        exclusive: false
+      })
     })
 
     it('bound the queue', () => {
-      expect(channel.bindQueue).to.have.been.calledOnce
+      expect(channel.bindQueue).to.have.been.calledOnceWith(
+        queue,
+        exchange,
+        queueName
+      )
     })
 
     it('prefetched 1 item', () => {
@@ -99,7 +141,7 @@ describe('makeSubscriber', () => {
     })
 
     it('consumed', () => {
-      expect(channel.consume).to.have.been.calledOnce
+      expect(channel.consume).to.have.been.calledOnceWith(queue, handler)
     })
 
     it('throws QUEUE_ALREADY_STARTED if you try and start it again', () =>
@@ -111,6 +153,8 @@ describe('makeSubscriber', () => {
       before(() => {
         subscriber = makeSubscriber({ exchange, queueName })
       })
+
+      after(resetHistory)
 
       it('throws QUEUE_NOT_STARTED', () =>
         expect(subscriber.stop()).to.be.rejectedWith(QUEUE_NOT_STARTED))
@@ -131,6 +175,8 @@ describe('makeSubscriber', () => {
         await subscriber.stop()
       })
 
+      after(resetHistory)
+
       it('closed the channel', () => {
         expect(channel.close).to.have.been.calledOnce
       })
@@ -144,6 +190,8 @@ describe('makeSubscriber', () => {
       before(() => {
         subscriber = makeSubscriber({ exchange, queueName })
       })
+
+      after(resetHistory)
 
       it('throws QUEUE_NOT_STARTED', () =>
         expect(() => subscriber.ack('some message')).to.throw(
@@ -165,6 +213,8 @@ describe('makeSubscriber', () => {
         subscriber.ack(message)
       })
 
+      after(resetHistory)
+
       it('called channel.ack with the message', () => {
         expect(channel.ack).to.have.been.calledWith(message)
       })
@@ -178,6 +228,8 @@ describe('makeSubscriber', () => {
       before(() => {
         subscriber = makeSubscriber({ exchange, queueName })
       })
+
+      after(resetHistory)
 
       it('throws QUEUE_NOT_STARTED', () =>
         expect(() => subscriber.nack('some message')).to.throw(
@@ -199,6 +251,8 @@ describe('makeSubscriber', () => {
         subscriber.nack(message)
       })
 
+      after(resetHistory)
+
       it('called channel.nack with the message', () => {
         expect(channel.nack).to.have.been.calledWith(message)
       })
@@ -210,6 +264,8 @@ describe('makeSubscriber', () => {
       before(() => {
         subscriber = makeSubscriber({ exchange, queueName })
       })
+
+      after(resetHistory)
 
       it('throws QUEUE_NOT_STARTED', () =>
         expect(subscriber.purgeQueue()).to.be.rejectedWith(QUEUE_NOT_STARTED))
@@ -231,6 +287,8 @@ describe('makeSubscriber', () => {
         await subscriber.purgeQueue()
       })
 
+      after(resetHistory)
+
       it('purged the queue', () => {
         expect(channel.purgeQueue).to.have.been.calledOnce
       })
@@ -242,6 +300,8 @@ describe('makeSubscriber', () => {
       before(() => {
         subscriber = makeSubscriber({ exchange, queueName })
       })
+
+      after(resetHistory)
 
       it('throws NOT_CONNECTED', () =>
         expect(subscriber.close()).to.be.rejectedWith(NOT_CONNECTED))
@@ -262,6 +322,8 @@ describe('makeSubscriber', () => {
         await subscriber.start(() => {})
         await subscriber.close()
       })
+
+      after(resetHistory)
 
       it('closed the connection', () => {
         expect(connection.close).to.have.been.calledOnce
