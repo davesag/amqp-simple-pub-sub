@@ -1,6 +1,5 @@
 module.exports = function(config) {
   config.set({
-    maxConcurrentTestRunners: 2, // ref https://github.com/stryker-mutator/stryker/issues/1542#issuecomment-491756095
     mutate: [
       'src/**/*.js',
       '!src/defaults.js',
