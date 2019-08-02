@@ -1,10 +1,10 @@
 {
   "name": "amqp-simple-pub-sub",
-  "version": "1.0.8",
-  "description": "A simple Pub Sub system that uses AMQP Messaging to exchange data between services",
+  "version": "1.0.9",
+  "description": "A Pub Sub system that uses AMQP Messaging to exchange data between services",
   "main": "src/index.js",
   "engines": {
-    "node": ">= 8.12.0"
+    "node": ">= 8.10.0"
   },
   "files": [
     "/package*.json",
@@ -30,34 +30,39 @@
     "start": "node index.js",
     "backend": "docker-compose up -d amqp",
     "test": "npm run test:unit",
-    "test:integration": "find ./test/integration -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/integration/test_helper.js --bail",
-    "test:unit": "find ./test/unit -name '*_spec.js' | NODE_ENV=test xargs mocha --require ./test/unit/test_helper.js",
-    "test:unit:cov": "find ./test/unit -name '*_spec.js' | NODE_ENV=test xargs nyc mocha --require ./test/unit/test_helper.js"
+    "test:integration": "NODE_ENV=test mocha ./test/integration/ --require ./test/integrationTestHelper.js --recursive --bail",
+    "test:unit": "NODE_ENV=test mocha ./test/unit/ --require ./test/unitTestHelper.js --recursive",
+    "test:unit:cov": "NODE_ENV=test nyc mocha ./test/unit/ --require ./test/unitTestHelper.js --recursive",
+    "test:mutants": "NODE_ENV=test npx stryker run"
   },
   "dependencies": {
-    "amqplib": "^0.5.3"
+    "amqplib": "^0.5.5"
   },
   "devDependencies": {
-    "ajv": "^6.10.0",
+    "@stryker-mutator/core": "^2.0.2",
+    "@stryker-mutator/javascript-mutator": "^2.0.2",
+    "@stryker-mutator/mocha-framework": "^2.0.2",
+    "@stryker-mutator/mocha-runner": "^2.0.2",
+    "ajv": "^6.10.2",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^4.1.0",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-mocha": "^5.3.0",
-    "eslint-plugin-node": "^8.0.1",
-    "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-promise": "^4.1.1",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-config-standard": "^13.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-mocha": "^6.0.0",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
-    "husky": "^1.3.1",
-    "lint-staged": "^8.1.5",
-    "mocha": "^6.1.1",
+    "husky": "^3.0.2",
+    "lint-staged": "^9.2.1",
+    "mocha": "^6.2.0",
     "mocha-prepare-promise": "0.0.2",
-    "nyc": "^13.3.0",
-    "prettier": "^1.16.4",
-    "proxyquire": "^2.1.0",
-    "sinon": "^7.3.1",
+    "nyc": "^14.1.1",
+    "prettier": "^1.17.1",
+    "proxyquire": "^2.1.1",
+    "sinon": "^7.3.2",
     "sinon-chai": "^3.3.0",
     "wait-until": "0.0.2"
   },

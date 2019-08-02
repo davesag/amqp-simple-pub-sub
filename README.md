@@ -1,14 +1,6 @@
 # AMQP Simple Pub Sub
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/davesag/amqp-simple-pub-sub.svg)](https://greenkeeper.io/)
-
-A simple Pub Sub system that uses AMQP Messaging to exchange data between services
-
-<!-- prettier-ignore -->
-| Branch | Tests | Code Coverage | Comments |
-| ------ | ----- | ------------- | -------- |
-| `develop` | [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop) | [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/develop/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub) | Work in progress |
-| `master` | [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/master.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/master) | [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/master/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub) | Latest release |
+A Pub Sub system that uses `AMQP` messaging to exchange data between services.
 
 [![NPM](https://nodei.co/npm/amqp-simple-pub-sub.png)](https://nodei.co/npm/amqp-simple-pub-sub/)
 
@@ -16,27 +8,27 @@ A simple Pub Sub system that uses AMQP Messaging to exchange data between servic
 
 You project needs to be using at least Node version 8, and ideally Node 10 (LTS) or later.
 
-```
+```sh
 npm install amqp-simple-pub-sub
 ```
 
 ### Create a Publisher
 
-```
+```js
 const { makePublisher } = require('amqp-simple-pub-sub')
 const publisher = makePublisher({ exchange: 'testService' })
 ```
 
 ### Publish a message
 
-```
+```js
 await publisher.start()
 publisher.publish('test', 'Hello World')
 ```
 
 ### Create a Subscriber
 
-```
+```js
 const { makeSubscriber } = require('amqp-simple-pub-sub')
 
 const subscriber = makeSubscriber({
@@ -48,7 +40,7 @@ const subscriber = makeSubscriber({
 
 ### Subscribe to a queue and listen for messages
 
-```
+```js
 const handler = message => {
   console.log('Message Received', message)
   subscriber.ack(message)
@@ -63,7 +55,7 @@ subscriber.start(handler)
 
 The full options object is as follows
 
-```
+```js
 {
   type: 'topic', // the default
   url: 'amqp://localhost', // the default
@@ -81,7 +73,7 @@ The full options object is as follows
 
 The full options object is as follows
 
-```
+```js
 {
   type: 'topic', // the default
   url: 'amqp://localhost', // the default
@@ -111,20 +103,28 @@ See some examples in the tests, and also:
 
 ## Development
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/davesag/amqp-simple-pub-sub.svg)](https://greenkeeper.io/)
+
+<!-- prettier-ignore -->
+| Branch | Tests | Code Coverage | Comments |
+| ------ | ----- | ------------- | -------- |
+| `develop` | [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop) | [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/develop/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub) | Work in progress |
+| `master` | [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/master.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/master) | [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/master/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub) | Latest release |
+
 ### Prerequisites
 
-- [NodeJS](htps://nodejs.org), version 10.15.3 (LTS) or better (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
+- [NodeJS](htps://nodejs.org), version 10.16.1 (LTS) or better (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
 - [Docker](https://www.docker.com) (Use [Docker for Mac](https://docs.docker.com/docker-for-mac/), not the homebrew version)
 
 ### Initialisation
 
-```
+```sh
 npm install
 ```
 
 ### To Start the queue server for integration testing.
 
-```
+```sh
 docker-compose up -d
 ```
 
@@ -132,12 +132,14 @@ Runs Rabbit MQ.
 
 ### Test it
 
-- `npm test` — runs the unit tests (quick and does not need rabbit mq running)
-- `npm run test:integration` — runs the integration tests (not so quick and needs rabbitmq running)
+- `npm test` — runs the unit tests (quick and does not need `rabbitmq` running)
+- `npm run test:unit:cov` — runs the unit tests with code coverage (does not need `rabbitmq`)
+- `npm run test:integration` — runs the integration tests (needs `rabbitmq`)
+- `npm run test:mutants` — runs the mutation tests (does not need `rabbitmq`)
 
 ### Lint it
 
-```
+```sh
 npm run lint
 ```
 

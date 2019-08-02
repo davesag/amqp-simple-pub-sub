@@ -1,6 +1,9 @@
 const { expect } = require('chai')
+const { stub, match } = require('sinon')
 const proxyquire = require('proxyquire')
+
 const { fakeChannel, fakeConnection, mockAmqplib } = require('./fakes')
+
 const {
   QUEUE_NOT_STARTED,
   QUEUE_ALREADY_STARTED,
@@ -11,7 +14,18 @@ const {
 describe('makePublisher', () => {
   const amqplib = mockAmqplib()
   const exchange = 'test'
-  const makePublisher = proxyquire('../../src/makePublisher', { amqplib })
+  const attachEvents = stub()
+
+  const makePublisher = proxyquire('../../src/makePublisher', {
+    amqplib,
+    './attachEvents': attachEvents
+  })
+
+  const url = 'amqp://localhost'
+  const type = 'type'
+  const onError = () => {}
+  const onClose = () => {}
+
   let publisher
   let channel
   let connection
@@ -44,7 +58,7 @@ describe('makePublisher', () => {
 
   describe('start', () => {
     before(async () => {
-      publisher = makePublisher({ exchange })
+      publisher = makePublisher({ exchange, url, type, onError, onClose })
       channel = fakeChannel()
       connection = fakeConnection()
       channel.assertExchange.resolves()
@@ -54,7 +68,17 @@ describe('makePublisher', () => {
     })
 
     it('connected', () => {
-      expect(amqplib.connect).to.have.been.calledOnce
+      expect(amqplib.connect).to.have.been.calledWith(url)
+    })
+
+    it('attached events', () => {
+      expect(attachEvents).to.have.been.calledWith(
+        connection,
+        match({
+          onError,
+          onClose
+        })
+      )
     })
 
     it('created a channel', () => {
@@ -62,7 +86,9 @@ describe('makePublisher', () => {
     })
 
     it('asserted the exchange', () => {
-      expect(channel.assertExchange).to.have.been.calledOnce
+      expect(channel.assertExchange).to.have.been.calledWith(exchange, type, {
+        durable: true
+      })
     })
 
     it('throws QUEUE_ALREADY_STARTED if you try and start it again', () =>
