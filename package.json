@@ -1,7 +1,7 @@
 {
   "name": "amqp-simple-pub-sub",
-  "version": "1.0.8",
-  "description": "A simple Pub Sub system that uses AMQP Messaging to exchange data between services",
+  "version": "1.0.9",
+  "description": "A Pub Sub system that uses AMQP Messaging to exchange data between services",
   "main": "src/index.js",
   "engines": {
     "node": ">= 8.10.0"
