@@ -1,6 +1,6 @@
 # AMQP Simple Pub Sub
 
-A Pub Sub system that uses `AMQP` messaging to exchange data between services
+A Pub Sub system that uses `AMQP` messaging to exchange data between services.
 
 [![NPM](https://nodei.co/npm/amqp-simple-pub-sub.png)](https://nodei.co/npm/amqp-simple-pub-sub/)
 
@@ -113,7 +113,7 @@ See some examples in the tests, and also:
 
 ### Prerequisites
 
-- [NodeJS](htps://nodejs.org), version 10.16.0 (LTS) or better (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
+- [NodeJS](htps://nodejs.org), version 10.16.1 (LTS) or better (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
 - [Docker](https://www.docker.com) (Use [Docker for Mac](https://docs.docker.com/docker-for-mac/), not the homebrew version)
 
 ### Initialisation
