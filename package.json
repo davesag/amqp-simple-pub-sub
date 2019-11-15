@@ -2,17 +2,25 @@
   "name": "amqp-simple-pub-sub",
   "version": "1.0.9",
   "description": "A Pub Sub system that uses AMQP Messaging to exchange data between services",
+  "author": "Dave Sag <davesag@gmail.com>",
+  "type": "commonjs",
+  "license": "MIT",
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/davesag"
+  },
   "main": "src/index.js",
   "engines": {
     "node": ">= 8.10.0"
   },
   "files": [
-    "/package*.json",
-    "/CONTRIBUTING.md",
-    "/src"
+    "CONTRIBUTING.md",
+    "src"
   ],
-  "author": "Dave Sag <davesag@gmail.com>",
-  "license": "MIT",
+  "directories": {
+    "lib": "src",
+    "test": "test"
+  },
   "keywords": [
     "amqp",
     "message-queue",
@@ -35,6 +43,11 @@
     "test:unit:cov": "NODE_ENV=test nyc mocha ./test/unit/ --require ./test/unitTestHelper.js --recursive",
     "test:mutants": "NODE_ENV=test npx stryker run"
   },
+  "repository": "https://github.com/davesag/amqp-simple-pub-sub.git",
+  "bugs": {
+    "url": "https://github.com/davesag/amqp-simple-pub-sub/issues"
+  },
+  "homepage": "https://github.com/davesag/amqp-simple-pub-sub#README",
   "dependencies": {
     "amqplib": "^0.5.5"
   },
@@ -66,26 +79,21 @@
     "sinon-chai": "^3.3.0",
     "wait-until": "0.0.2"
   },
-  "repository": "https://github.com/davesag/amqp-simple-pub-sub.git",
-  "bugs": {
-    "url": "https://github.com/davesag/amqp-simple-pub-sub/issues"
-  },
-  "homepage": "https://github.com/davesag/amqp-simple-pub-sub#README",
   "prettier": {
     "semi": false,
     "singleQuote": true,
     "proseWrap": "never"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "**/*.{js,json,md}": [
       "prettier --write",
       "git add"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "nyc": {
     "check-coverage": true,
