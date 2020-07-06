@@ -99,21 +99,21 @@ See some examples in the tests, and also:
 ## Related Projects
 
 - [`amqp-delegate`](https://github.com/davesag/amqp-delegate) — A library that simplifies, to the point of triviality, use of AMQP based remote workers.
-- [`ampq-event-tester`](https://github.com/davesag/amqp-event-tester) — A Dockerised and configurable utility to help integration-test your amqp services.
+- [`ampq-event-tester`](https://github.com/davesag/amqp-event-tester) — A Dockerised and configurable utility to help integration-test your AMQP services.
 
 ## Development
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/davesag/amqp-simple-pub-sub.svg)](https://greenkeeper.io/)
+### Branches
 
 <!-- prettier-ignore -->
-| Branch | Tests | Code Coverage | Comments |
-| ------ | ----- | ------------- | -------- |
-| `develop` | [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop) | [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/develop/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub) | Work in progress |
-| `master` | [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/master.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/master) | [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/master/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub) | Latest release |
+| Branch | Tests | Code Coverage | Audit | Comments |
+| ------ | ----- | ------------- | ----- | -------- |
+| `develop` | [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop) | [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/develop/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub) | [![Vulnerabilities](https://snyk.io/test/github/davesag/amqp-simple-pub-sub/develop/badge.svg)](https://snyk.io/test/github/davesag/amqp-simple-pub-sub/develop) | Work in progress |
+| `master` | [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/master.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/master) | [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/master/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub) | [![Vulnerabilities](https://snyk.io/test/github/davesag/amqp-simple-pub-sub/master/badge.svg)](https://snyk.io/test/github/davesag/amqp-simple-pub-sub/master) | Latest release |
 
 ### Prerequisites
 
-- [NodeJS](htps://nodejs.org), version 10.16.3 (LTS) or better (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
+- [NodeJS](htps://nodejs.org), version 10.18.2 (LTS) or better (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
 - [Docker](https://www.docker.com) (Use [Docker for Mac](https://docs.docker.com/docker-for-mac/), not the homebrew version)
 
 ### Initialisation
