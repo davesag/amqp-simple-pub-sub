@@ -50,7 +50,7 @@
   },
   "homepage": "https://github.com/davesag/amqp-simple-pub-sub#README",
   "dependencies": {
-    "amqplib": "^0.5.6"
+    "amqplib": "^0.6.0"
   },
   "devDependencies": {
     "@stryker-mutator/core": "^3.3.1",
