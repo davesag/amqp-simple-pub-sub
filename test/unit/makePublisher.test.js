@@ -151,11 +151,7 @@ describe('makePublisher', () => {
       })
 
       it('published a buffer of the data with the key for the exchange', () => {
-        expect(channel.publish).to.have.been.calledWith(
-          exchange,
-          key,
-          Buffer.from(data)
-        )
+        expect(channel.publish).to.have.been.calledWith(exchange, key, Buffer.from(data))
       })
     })
   })
@@ -166,8 +162,7 @@ describe('makePublisher', () => {
         publisher = makePublisher({ exchange })
       })
 
-      it('throws NOT_CONNECTED', () =>
-        expect(publisher.close()).to.be.rejectedWith(NOT_CONNECTED))
+      it('throws NOT_CONNECTED', () => expect(publisher.close()).to.be.rejectedWith(NOT_CONNECTED))
     })
 
     context('after the publisher was started', () => {

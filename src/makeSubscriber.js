@@ -27,15 +27,7 @@ const makeSubscriber = options => {
     ...options
   }
 
-  const {
-    exchange,
-    queueName,
-    routingKeys,
-    type,
-    url,
-    onClose,
-    onError
-  } = _options
+  const { exchange, queueName, routingKeys, type, url, onClose, onError } = _options
 
   if (!exchange) throw new Error(EXCHANGE_MISSING)
   if (!queueName) throw new Error(QUEUE_MISSING)
