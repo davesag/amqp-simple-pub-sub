@@ -35,3 +35,6 @@ node_modules/
 
 # macOS Desktop cache files
 .DS_Source
+
+# VS Code metadata
+.vscode
