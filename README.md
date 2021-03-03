@@ -6,7 +6,7 @@ A Pub Sub system that uses `AMQP` messaging to exchange data between services.
 
 ## To Use
 
-You project needs to be using at least Node version 8, and ideally Node 10 (LTS) or later.
+You project needs to be using at least Node version 8, and ideally Node 14 (LTS) or later.
 
 ```sh
 npm install amqp-simple-pub-sub
