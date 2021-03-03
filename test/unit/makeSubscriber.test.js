@@ -2,12 +2,7 @@ const { expect } = require('chai')
 const { stub, resetHistory } = require('sinon')
 const proxyquire = require('proxyquire')
 
-const {
-  fakeChannel,
-  fakeConnection,
-  fakeQueue,
-  mockAmqplib
-} = require('./fakes')
+const { fakeChannel, fakeConnection, fakeQueue, mockAmqplib } = require('./fakes')
 const {
   QUEUE_NOT_STARTED,
   QUEUE_ALREADY_STARTED,
@@ -65,9 +60,7 @@ describe('makeSubscriber', () => {
     })
 
     it('has functions', () => {
-      ;['start', 'stop', 'ack', 'nack', 'purgeQueue', 'close'].forEach(
-        hasFunction(subscriber)
-      )
+      ;['start', 'stop', 'ack', 'nack', 'purgeQueue', 'close'].forEach(hasFunction(subscriber))
     })
   })
 
@@ -115,11 +108,7 @@ describe('makeSubscriber', () => {
     })
 
     it('asserted the exchange', () => {
-      expect(channel.assertExchange).to.have.been.calledOnceWith(
-        exchange,
-        type,
-        { durable: true }
-      )
+      expect(channel.assertExchange).to.have.been.calledOnceWith(exchange, type, { durable: true })
     })
 
     it('asserted the queue', () => {
@@ -129,11 +118,7 @@ describe('makeSubscriber', () => {
     })
 
     it('bound the queue', () => {
-      expect(channel.bindQueue).to.have.been.calledOnceWith(
-        queue,
-        exchange,
-        queueName
-      )
+      expect(channel.bindQueue).to.have.been.calledOnceWith(queue, exchange, queueName)
     })
 
     it('prefetched 1 item', () => {
@@ -194,9 +179,7 @@ describe('makeSubscriber', () => {
       after(resetHistory)
 
       it('throws QUEUE_NOT_STARTED', () =>
-        expect(() => subscriber.ack('some message')).to.throw(
-          QUEUE_NOT_STARTED
-        ))
+        expect(() => subscriber.ack('some message')).to.throw(QUEUE_NOT_STARTED))
     })
 
     context('after the subscriber was started', () => {
@@ -232,9 +215,7 @@ describe('makeSubscriber', () => {
       after(resetHistory)
 
       it('throws QUEUE_NOT_STARTED', () =>
-        expect(() => subscriber.nack('some message')).to.throw(
-          QUEUE_NOT_STARTED
-        ))
+        expect(() => subscriber.nack('some message')).to.throw(QUEUE_NOT_STARTED))
     })
 
     context('after the subscriber was started', () => {
@@ -303,8 +284,7 @@ describe('makeSubscriber', () => {
 
       after(resetHistory)
 
-      it('throws NOT_CONNECTED', () =>
-        expect(subscriber.close()).to.be.rejectedWith(NOT_CONNECTED))
+      it('throws NOT_CONNECTED', () => expect(subscriber.close()).to.be.rejectedWith(NOT_CONNECTED))
     })
 
     context('after the subscriber was started', () => {

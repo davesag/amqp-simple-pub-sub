@@ -6,7 +6,7 @@ A Pub Sub system that uses `AMQP` messaging to exchange data between services.
 
 ## To Use
 
-You project needs to be using at least Node version 8, and ideally Node 10 (LTS) or later.
+You project needs to be using at least Node version 8, and ideally Node 14 (LTS) or later.
 
 ```sh
 npm install amqp-simple-pub-sub
@@ -113,7 +113,7 @@ See some examples in the tests, and also:
 
 ### Prerequisites
 
-- [NodeJS](htps://nodejs.org), version 10.18.2 (LTS) or better (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
+- [NodeJS](htps://nodejs.org), 8.10.0+ (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
 - [Docker](https://www.docker.com) (Use [Docker for Mac](https://docs.docker.com/docker-for-mac/), not the homebrew version)
 
 ### Initialisation
@@ -135,7 +135,6 @@ Runs Rabbit MQ.
 - `npm test` — runs the unit tests (quick and does not need `rabbitmq` running)
 - `npm run test:unit:cov` — runs the unit tests with code coverage (does not need `rabbitmq`)
 - `npm run test:integration` — runs the integration tests (needs `rabbitmq`)
-- `npm run test:mutants` — runs the mutation tests (does not need `rabbitmq`)
 
 ### Lint it
 
