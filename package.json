@@ -1,6 +1,6 @@
 {
   "name": "amqp-simple-pub-sub",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Pub Sub system that uses AMQP Messaging to exchange data between services",
   "author": "Dave Sag <davesag@gmail.com>",
   "type": "commonjs",
@@ -49,7 +49,7 @@
   },
   "homepage": "https://github.com/davesag/amqp-simple-pub-sub#README",
   "dependencies": {
-    "amqplib": "^0.7.0"
+    "amqplib": "^0.7.1"
   },
   "devDependencies": {
     "ajv": "^7.0.3",
