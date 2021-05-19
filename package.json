@@ -11,7 +11,7 @@
   },
   "main": "src/index.js",
   "engines": {
-    "node": ">= 8.10.0"
+    "node": ">= 10"
   },
   "files": [
     "CONTRIBUTING.md",
@@ -49,7 +49,7 @@
   },
   "homepage": "https://github.com/davesag/amqp-simple-pub-sub#README",
   "dependencies": {
-    "amqplib": "^0.7.1"
+    "amqplib": "^0.8.0"
   },
   "devDependencies": {
     "ajv": "^8.1.0",
