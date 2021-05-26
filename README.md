@@ -109,7 +109,7 @@ See some examples in the tests, and also:
 | Branch | Tests | Code Coverage | Audit | Comments |
 | ------ | ----- | ------------- | ----- | -------- |
 | `develop` | [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/develop) | [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/develop/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub) | [![Vulnerabilities](https://snyk.io/test/github/davesag/amqp-simple-pub-sub/develop/badge.svg)](https://snyk.io/test/github/davesag/amqp-simple-pub-sub/develop) | Work in progress |
-| `master` | [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/master.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/master) | [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/master/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub) | [![Vulnerabilities](https://snyk.io/test/github/davesag/amqp-simple-pub-sub/master/badge.svg)](https://snyk.io/test/github/davesag/amqp-simple-pub-sub/master) | Latest release |
+| `main` | [![CircleCI](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/main.svg?style=svg)](https://circleci.com/gh/davesag/amqp-simple-pub-sub/tree/main) | [![codecov](https://codecov.io/gh/davesag/amqp-simple-pub-sub/branch/main/graph/badge.svg)](https://codecov.io/gh/davesag/amqp-simple-pub-sub) | [![Vulnerabilities](https://snyk.io/test/github/davesag/amqp-simple-pub-sub/main/badge.svg)](https://snyk.io/test/github/davesag/amqp-simple-pub-sub/main) | Latest release |
 
 ### Prerequisites
 
