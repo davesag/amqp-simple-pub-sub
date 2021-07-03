@@ -22,11 +22,13 @@ jobs:
 
       - run:
           name: Install global packages
-          command: sudo npm install -g codecov greenkeeper-lockfile@1
+          command: sudo npm install -g codecov
 
       - run:
-          name: Greenkeeper Lockfile
-          command: greenkeeper-lockfile-update
+          name: Install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.6.1
 
       - run:
           name: Install dependencies
@@ -46,12 +48,12 @@ jobs:
           command: npm run test:unit:cov
 
       - run:
-          name: Integration Tests
-          command: npm run test:integration
+          name: Wait for RabbitMQ to have started
+          command: dockerize -wait tcp://localhost:5672 -timeout 1m
 
       - run:
-          name: Push any lockfile changes
-          command: greenkeeper-lockfile-upload
+          name: Integration Tests
+          command: npm run test:integration
 
       - run:
           name: Send reports to codecov.io
