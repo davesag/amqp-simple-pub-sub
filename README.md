@@ -6,7 +6,7 @@ A Pub Sub system that uses `AMQP` messaging to exchange data between services.
 
 ## To Use
 
-You project needs to be using at least Node version 10, and ideally Node 14 (LTS) or later.
+You project needs to be using at least Node version 10, and ideally Node 18 (LTS) or later.
 
 ```sh
 npm install amqp-simple-pub-sub
@@ -113,7 +113,7 @@ See some examples in the tests, and also:
 
 ### Prerequisites
 
-- [NodeJS](htps://nodejs.org), 10.0+ (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
+- [NodeJS](https://nodejs.org), 10.0+ (I use [`nvm`](https://github.com/creationix/nvm) to manage Node versions — `brew install nvm`.)
 - [Docker](https://www.docker.com) (Use [Docker for Mac](https://docs.docker.com/docker-for-mac/), not the homebrew version)
 
 ### Initialisation
@@ -122,7 +122,7 @@ See some examples in the tests, and also:
 npm install
 ```
 
-### To Start the queue server for integration testing.
+### To Start the queue server for integration testing
 
 ```sh
 docker-compose up -d
