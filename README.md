@@ -49,8 +49,6 @@ const handler = message => {
 subscriber.start(handler)
 ```
 
-### Other Options
-
 #### Publisher
 
 The full options object is as follows
@@ -65,7 +63,8 @@ The full options object is as follows
   },
   onClose: () => { // optional
     console.log('The connection has closed.') // or do something clever
-  }
+  },
+  ...otherOptions // anything else you pass in gets passed directly to `amqp.connect`
 }
 ```
 
@@ -85,9 +84,24 @@ The full options object is as follows
   },
   onClose: () => { // optional
     console.log('The connection has closed.') // or do something clever
-  }
+  },
+  ...otherOptions // anything else you pass in gets passed directly to `amqp.connect`
 }
 ```
+
+### Other Options
+
+As outlined above both `createPublisher` and `createPublisher` also accept other options.
+
+These are passed straight onto `amqp.connect` under the hood. The options are:
+
+- `clientProperties`: see [`connect.js`](https://github.com/amqp-node/amqplib/blob/main/lib/connect.js#L30)
+- `credentials`
+- `keepAlive`
+- `keepAliveDelay`
+- `noDelay`
+- `servername`
+- `timeout`
 
 #### Examples
 
@@ -125,7 +139,7 @@ npm install
 ### To Start the queue server for integration testing
 
 ```sh
-docker-compose up -d
+docker compose up -d
 ```
 
 Runs Rabbit MQ.

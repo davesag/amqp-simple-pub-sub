@@ -13,7 +13,7 @@ const attachEvents = require('./attachEvents')
  * @param options
  *   - exchange The name of the service exchange queue (required)
  *   - type The type of AMQP queue to use. Defaults to 'topic'
- *   - url The url of the AQMP server to use.  Defaults to 'amqp://localhost'
+ *   - url The url of the AMQP server to use.  Defaults to 'amqp://localhost'
  *   - onError a hander to handle connection errors (optional)
  *   - onClose a handler to handle connection closed events (optional)
  * @return A Publisher
@@ -24,7 +24,7 @@ const makePublisher = options => {
     ...options
   }
 
-  const { exchange, type, url, onError, onClose } = _options
+  const { exchange, type, url, onError, onClose, ...opts } = _options
 
   if (!exchange) throw new Error(EXCHANGE_MISSING)
 
@@ -33,7 +33,7 @@ const makePublisher = options => {
 
   const start = async () => {
     if (channel) throw new Error(QUEUE_ALREADY_STARTED)
-    connection = await amqp.connect(url)
+    connection = await amqp.connect(url, opts)
     attachEvents(connection, { onError, onClose })
 
     channel = await connection.createChannel()

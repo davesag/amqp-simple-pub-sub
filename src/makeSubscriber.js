@@ -27,7 +27,7 @@ const makeSubscriber = options => {
     ...options
   }
 
-  const { exchange, queueName, routingKeys, type, url, onClose, onError } = _options
+  const { exchange, queueName, routingKeys, type, url, onClose, onError, ...opts } = _options
 
   if (!exchange) throw new Error(EXCHANGE_MISSING)
   if (!queueName) throw new Error(QUEUE_MISSING)
@@ -50,7 +50,7 @@ const makeSubscriber = options => {
    */
   const start = async handler => {
     if (channel) throw new Error(QUEUE_ALREADY_STARTED)
-    connection = await amqp.connect(url)
+    connection = await amqp.connect(url, opts)
     attachEvents(connection, { onError, onClose })
 
     channel = await connection.createChannel()
