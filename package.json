@@ -49,7 +49,7 @@
   },
   "homepage": "https://github.com/davesag/amqp-simple-pub-sub#README",
   "dependencies": {
-    "amqplib": "^0.10.0"
+    "amqplib": "^0.10.2"
   },
   "devDependencies": {
     "@snyk/protect": "^1.981.0",
