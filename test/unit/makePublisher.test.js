@@ -91,18 +91,39 @@ describe('makePublisher', () => {
       })
     })
 
-    it('throws QUEUE_ALREADY_STARTED if you try and start it again', () =>
-      expect(publisher.start()).to.be.rejectedWith(QUEUE_ALREADY_STARTED))
+    context('if you try and start it again', () => {
+      let error
+
+      before(async () => {
+        try {
+          await publisher.start()
+        } catch (err) {
+          error = err
+        }
+      })
+
+      it('throws QUEUE_ALREADY_STARTED ', () => {
+        expect(error.message).to.equal(QUEUE_ALREADY_STARTED)
+      })
+    })
   })
 
   describe('stop', () => {
     context('before the publisher was started', () => {
-      before(() => {
+      let error
+
+      before(async () => {
         publisher = makePublisher({ exchange })
+        try {
+          await publisher.stop()
+        } catch (err) {
+          error = err
+        }
       })
 
-      it('throws QUEUE_NOT_STARTED', () =>
-        expect(publisher.stop()).to.be.rejectedWith(QUEUE_NOT_STARTED))
+      it('throws QUEUE_NOT_STARTED', () => {
+        expect(error.message).to.equal(QUEUE_NOT_STARTED)
+      })
     })
 
     context('after the publisher was started', () => {
@@ -126,12 +147,19 @@ describe('makePublisher', () => {
 
   describe('publish', () => {
     context('before the publisher was started', () => {
-      before(() => {
-        publisher = makePublisher({ exchange })
-      })
+      let error
 
-      it('throws QUEUE_NOT_STARTED', () =>
-        expect(publisher.publish()).to.be.rejectedWith(QUEUE_NOT_STARTED))
+      before(async () => {
+        publisher = makePublisher({ exchange })
+        try {
+          await publisher.publish()
+        } catch (err) {
+          error = err
+        }
+      })
+      it('throws QUEUE_NOT_STARTED', () => {
+        expect(error.message).to.equal(QUEUE_NOT_STARTED)
+      })
     })
 
     context('after the publisher was started', () => {
@@ -158,11 +186,20 @@ describe('makePublisher', () => {
 
   describe('close', () => {
     context('before the publisher was started', () => {
-      before(() => {
+      let error
+
+      before(async () => {
         publisher = makePublisher({ exchange })
+        try {
+          await publisher.close()
+        } catch (err) {
+          error = err
+        }
       })
 
-      it('throws NOT_CONNECTED', () => expect(publisher.close()).to.be.rejectedWith(NOT_CONNECTED))
+      it('throws NOT_CONNECTED', () => {
+        expect(error.message).to.equal(NOT_CONNECTED)
+      })
     })
 
     context('after the publisher was started', () => {

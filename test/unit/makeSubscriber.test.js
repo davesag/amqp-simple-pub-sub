@@ -129,20 +129,40 @@ describe('makeSubscriber', () => {
       expect(channel.consume).to.have.been.calledOnceWith(queue, handler)
     })
 
-    it('throws QUEUE_ALREADY_STARTED if you try and start it again', () =>
-      expect(subscriber.start()).to.be.rejectedWith(QUEUE_ALREADY_STARTED))
+    context('if you try and start it again', () => {
+      let error
+
+      before(async () => {
+        try {
+          await subscriber.start()
+        } catch (err) {
+          error = err
+        }
+      })
+      it('throws QUEUE_ALREADY_STARTED', () => {
+        expect(error.message).to.equal(QUEUE_ALREADY_STARTED)
+      })
+    })
   })
 
   describe('stop', () => {
     context('before the subscriber was started', () => {
-      before(() => {
+      let error
+
+      before(async () => {
         subscriber = makeSubscriber({ exchange, queueName })
+        try {
+          await subscriber.stop()
+        } catch (err) {
+          error = err
+        }
       })
 
       after(resetHistory)
 
-      it('throws QUEUE_NOT_STARTED', () =>
-        expect(subscriber.stop()).to.be.rejectedWith(QUEUE_NOT_STARTED))
+      it('throws QUEUE_NOT_STARTED', () => {
+        expect(error.message).to.equal(QUEUE_NOT_STARTED)
+      })
     })
 
     context('after the subscriber was started', () => {
@@ -172,14 +192,22 @@ describe('makeSubscriber', () => {
     const message = 'some message'
 
     context('before the subscriber was started', () => {
-      before(() => {
+      let error
+
+      before(async () => {
         subscriber = makeSubscriber({ exchange, queueName })
+        try {
+          await subscriber.ack('some message')
+        } catch (err) {
+          error = err
+        }
       })
 
       after(resetHistory)
 
-      it('throws QUEUE_NOT_STARTED', () =>
-        expect(() => subscriber.ack('some message')).to.throw(QUEUE_NOT_STARTED))
+      it('throws QUEUE_NOT_STARTED', () => {
+        expect(error.message).to.equal(QUEUE_NOT_STARTED)
+      })
     })
 
     context('after the subscriber was started', () => {
@@ -242,14 +270,22 @@ describe('makeSubscriber', () => {
 
   describe('purgeQueue', () => {
     context('before the subscriber was started', () => {
-      before(() => {
+      let error
+
+      before(async () => {
         subscriber = makeSubscriber({ exchange, queueName })
+        try {
+          await subscriber.purgeQueue()
+        } catch (err) {
+          error = err
+        }
       })
 
       after(resetHistory)
 
-      it('throws QUEUE_NOT_STARTED', () =>
-        expect(subscriber.purgeQueue()).to.be.rejectedWith(QUEUE_NOT_STARTED))
+      it('throws QUEUE_NOT_STARTED', () => {
+        expect(error.message).to.equal(QUEUE_NOT_STARTED)
+      })
     })
 
     context('after the subscriber was started', () => {
@@ -278,13 +314,22 @@ describe('makeSubscriber', () => {
 
   describe('close', () => {
     context('before the subscriber was started', () => {
-      before(() => {
+      let error
+
+      before(async () => {
         subscriber = makeSubscriber({ exchange, queueName })
+        try {
+          await subscriber.close()
+        } catch (err) {
+          error = err
+        }
       })
 
       after(resetHistory)
 
-      it('throws NOT_CONNECTED', () => expect(subscriber.close()).to.be.rejectedWith(NOT_CONNECTED))
+      it('throws NOT_CONNECTED', () => {
+        expect(error.message).to.equal(NOT_CONNECTED)
+      })
     })
 
     context('after the subscriber was started', () => {
